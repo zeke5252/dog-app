@@ -2,10 +2,10 @@
     <div
         class="
           w-60
-          flex-auto flex flex-wrap
+          flex
           box-border
           flex-col
-          p-9
+          p-7
           bg-white
           items-start
           rounded-md
@@ -22,7 +22,7 @@
           v-else
           class="
             w-full
-            h-60
+            h-44
             bg-gray-200
             text-gray-400
             flex
@@ -51,7 +51,7 @@
 
         <nuxt-link
           :to="{ name: 'dogs-dogid', params: { dogid: dog.animal_id } }"
-          class = "btnSecondary mt-2.5"
+          class = "btnPrimary mt-2.5"
           >詳細資訊 >
         </nuxt-link>
       </div>

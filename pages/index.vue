@@ -1,11 +1,11 @@
 <template>
   <div>
     <Banner />
-    <div class="px-10">
+    <div class="flex flex-col items-center">
       <SearchBar :do-fetch="$fetch" @do-fetch="getSearchedDogs" @clear-results= "clearSearchedDogs"/>
-      <Loading v-if="$fetchState.pending" />
+      <Loading v-if="$fetchState.pending" :position="'mt-20'" />
       <Error v-else-if="$fetchState.error" />
-      <div v-else id="dogs-grid" class="flex flex-wrap gap-3">
+      <div v-else id="dogs-grid" class="flex flex-wrap flex-grow-0 gap-3">
         <Card v-for="(dog, index) in searchedDogs" :key="index" :dog="dog"/>
       </div>
     </div>

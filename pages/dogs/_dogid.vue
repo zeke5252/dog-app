@@ -3,7 +3,8 @@
     <div>
         <nuxt-link class="btnPrimary inline-block mb-5" to="../">Back</nuxt-link>
         <Loading v-if="$fetchState.pending"/>
-        <div v-else class="flex items-start overflow-hidden gap-16 ">
+        <div v-else class="relative flex items-start overflow-hidden gap-16 ">
+            <button :class="storageLocation>=0 ? 'btnPrimary absolute right-4' : 'absolute right-4'" @click="setFavorite">加入我的最愛</button>
             <img class="w-1/2 shadow-lg p-20 bg-white" :src="dog.album_file"  alt="">
             <div class="dogInfo">
                 <p  class="m-1">編號: <span> {{dog.animal_id}}</span></p>
@@ -42,6 +43,8 @@ export default {
     data() {
         return {
             dog: {},
+            favorites: [],
+            storageLocation: null,
         }
     },
     async fetch() {
@@ -57,19 +60,35 @@ export default {
                 {
                     hid: 'description',
                     name: 'description',
-                    content: 'Adopt your dog here with the most detailed information'
+                    content: 'Detailed content about the dog where you can add to favorites'
                 }
                 ],
 
                 link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]}
     },
     fetchDelay: 1000,
+    mounted() {
+        const favoriteStr = localStorage.getItem("favorites");
+        this.favorites = favoriteStr ? JSON.parse(favoriteStr) : [];
+        this.getFavoriteLocation();
+        
+    },
     methods: {
         async getSingleDog() {
             const results = await axios.get(`https://data.coa.gov.tw/api/v1/AnimalRecognition/?animal_id=${this.$route.params.dogid}`);
             results.data.Data.forEach( result => {
                 this.dog = result;
             })
+        },
+        setFavorite() {
+            this.storageLocation >= 0 ? this.favorites.splice(this.storageLocation, 1) : this.favorites.push(this.dog.animal_id);    
+            this.getFavoriteLocation();  
+            localStorage.setItem("favorites", JSON.stringify(this.favorites));
+        },
+        getFavoriteLocation() {
+            this.storageLocation = this.favorites.indexOf(this.$route.params.dogid);
+            
+            
         }
     },
 }

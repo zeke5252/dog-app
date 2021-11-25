@@ -1,15 +1,21 @@
 .btnPrimary {
-    @apply bg-blue-400 hover:bg-blue-500 py-1.5 px-4 rounded-sm mt-2.5 font-semibold shadow-md text-white
-}
-.btnSecondary {
-    @apply bg-yellow-400 hover:bg-yellow-500 py-1.5 px-4 rounded-sm mt-2.5 font-semibold shadow-md
+    @apply bg-yellow-400 hover:bg-yellow-500 hover:scale-110 py-1.5 px-4 rounded-sm font-semibold transition duration-100 ease-in-out
 }
 .inputStyle {
-    @apply p-2 text-sm hover:bg-gray-50 focus:outline-none bg-yellow-100
+    @apply inline-block h-9 p-2 text-sm hover:bg-gray-50 focus:outline-none bg-white box-border shadow-sm
 }
 .cardInfo {
     @apply text-sm text-gray-800 font-semibold
 }
 .cardInfoNone {
     @apply text-sm text-gray-300 font-semibold
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
 }

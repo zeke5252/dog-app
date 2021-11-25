@@ -1,9 +1,9 @@
 <template>
   <nav class="w-100 bg-yellow-200">
-    <ul class="w-full flex gap-9 py-4 px-10 text-sm font-semibold">
-      <li class=""><nuxt-link to="/">回首頁</nuxt-link></li>
-      <li class=""><nuxt-link to="/about">關於網站</nuxt-link></li>
-      <li class=""><nuxt-link to="/favorite">我的最愛</nuxt-link></li>
+    <ul class="w-80 justify-between flex py-4 text-sm font-semibold">
+      <li class="w-1/3"><nuxt-link class="py-1.5 px-4 rounded-sm" to="/">回首頁</nuxt-link></li>
+      <li class="w-1/3"><nuxt-link class="py-1.5 px-4 rounded-sm" to="/about">關於網站</nuxt-link></li>
+      <li class="w-1/3"><nuxt-link class="py-1.5 px-4 rounded-sm" to="/favorite">我的最愛</nuxt-link></li>
     </ul>
   </nav>
 </template>
@@ -15,5 +15,7 @@ export default {
 </script>
 
 <style>
-
+  a.nuxt-link-exact-active {
+    @apply bg-yellow-400 ;
+  }
 </style>
