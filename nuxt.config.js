@@ -1,4 +1,8 @@
 export default {
+  target: 'static',
+  router: {
+    base: '/dog-app/'
+  },
   head: {
     title: 'Happy Dog Adoption',
     meta: [
