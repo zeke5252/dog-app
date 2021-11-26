@@ -29,8 +29,8 @@ export default {
     async getSearchedDogs(searchObj) {
       if(!searchObj){
         searchObj = {
-          bodytype: '',
-          sex: '',
+          bodytype: 'MEDIUM',
+          sex: 'M',
           colour: '',
           age: '',
           foundPlace: '',
