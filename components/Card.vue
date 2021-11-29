@@ -1,27 +1,23 @@
 <template>
     <div
         class="
-          w-60
           flex
-          box-border
           flex-col
-          p-7
+          p-3
+          md:p-7
           bg-white
-          items-start
-          rounded-md
-          shadow-lg
+          rounded-sm
         "
       >
         <div
           v-if="dog.album_file"
-          class="w-full max-h-60 overflow-hidden rounded-sm"
+          class="w-full max-h-60 overflow-hidden rounded-sm mb-2"
         >
-          <img :src="dog.album_file" alt="" class="shadow-inner object-cover" />
+          <img :src="dog.album_file" alt="dog.foundplace" class="object-cover" />
         </div>
         <div
           v-else
           class="
-            w-full
             h-44
             bg-gray-200
             text-gray-400
@@ -30,25 +26,12 @@
             items-center
             shadow-inner
             rounded-md
+            mb-2
           "
         >
           <p>no photo</p>
         </div>
-        <span v-if="dog.animal_bodytype !== ''" class="cardInfo mt-4 ">{{ dog.animal_bodytype }}</span>
-        <span v-else class="cardInfoNone mt-2 "> 無資訊 </span>
-
-        <span v-if="dog.animal_sex !== ''" class="cardInfo mt-2 ">{{ dog.animal_sex}}</span>
-        <span v-else class="cardInfoNone mt-2 "> 無資訊 </span>
-
-        <span v-if="dog.animal_colour !== ''" class="cardInfo mt-2 ">{{ dog.animal_colour}}</span>
-        <span v-else class="cardInfoNone mt-2 "> 無資訊 </span>
-
-        <span v-if="dog.animal_age !== ''" class="cardInfo mt-2 ">{{ dog.animal_age }}</span>
-        <span v-else class="cardInfoNone mt-2 "> 無資訊 </span>
-
-        <span v-if="dog.animal_foundplace !== ''" class="cardInfo mt-2 mb-2 ">{{ dog.animal_foundplace}}</span>
-        <span v-else class="cardInfoNone mt-2 "> 無資訊 </span>
-
+        <CardInfoItem v-for="(info, index) in infoToShow" :key="index" :info="dog['animal_'+info]" />
         <nuxt-link
           :to="{ name: 'dogs-dogid', params: { dogid: dog.animal_id } }"
           class = "btnPrimary mt-2.5"
@@ -65,6 +48,11 @@ export default {
       type: Object,
       required: true
     },
+  },
+  data() {
+    return {
+      infoToShow: ['bodytype', 'sex', 'colour', 'age', 'foundplace']
+    }
   }
 }
 </script>

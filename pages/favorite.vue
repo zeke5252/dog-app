@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>{{test}}</h1>
-    <div id="dogs-grid" class="flex flex-wrap gap-3">
+    <div id="dogs-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
       <Card v-for="(dog, index) in dogs" :key="index" :dog="dog" />
     </div>
   </div>
@@ -10,12 +9,6 @@
 <script>
 import axios from "axios";
 export default { 
-  asyncData({params}){
-    const test = "哈哈";
-    console.log('test: ', test);
-
-    return { test }
-  },
   data() {
     return {
       dogs: [],

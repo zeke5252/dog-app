@@ -1,9 +1,16 @@
 <template>
-  <nav class="w-100 bg-yellow-200">
-    <ul class="w-80 justify-between flex py-4 text-sm font-semibold">
-      <li class="w-1/3"><nuxt-link class="py-1.5 px-4 rounded-sm" to="/">回首頁</nuxt-link></li>
-      <li class="w-1/3"><nuxt-link class="py-1.5 px-4 rounded-sm" to="/about">關於網站</nuxt-link></li>
-      <li class="w-1/3"><nuxt-link class="py-1.5 px-4 rounded-sm" to="/favorite">我的最愛</nuxt-link></li>
+  <nav class="w-48 bg-yellow-200 mb-5">
+    <ul class="flex pt-5 pb-3 text-sm font-semibold">
+      <li class="w-1/2">
+        <nuxt-link class="py-2.5 px-5 rounded-sm" to="/">
+          回首頁
+        </nuxt-link>
+      </li>
+      <li class="w-1/2">
+        <nuxt-link class="py-2.5 px-5 rounded-sm" to="/favorite">
+          我的最愛
+        </nuxt-link>
+      </li>
     </ul>
   </nav>
 </template>
@@ -16,6 +23,6 @@ export default {
 
 <style>
   a.nuxt-link-exact-active {
-    @apply bg-yellow-400 ;
+    @apply border-b-4 border-yellow-400 ;
   }
 </style>

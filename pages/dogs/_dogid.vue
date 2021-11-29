@@ -1,11 +1,13 @@
 
 <template>
-    <div>
-        <nuxt-link class="btnPrimary inline-block mb-5" to="../">Back</nuxt-link>
-        <Loading v-if="$fetchState.pending"/>
-        <div v-else class="relative flex items-start overflow-hidden gap-16 ">
-            <button :class="storageLocation>=0 ? 'btnPrimary absolute right-4' : 'absolute right-4'" @click="setFavorite">加入我的最愛</button>
-            <img class="w-1/2 shadow-lg p-20 bg-white" :src="dog.album_file"  alt="">
+    <div class="flex flex-col items-start">
+        <nuxt-link class="btnPrimary mb-5" to="../">Back</nuxt-link>
+        <Loading v-if="$fetchState.pending" position="mt-20 center"/>
+        <div v-else class="relative w-full">
+            <div class="relative flex flex-col gap-3 items-start justify-self-center w-full md:w-2/3 px-4 pt-4 pb-4 md:p-15 mb-10 bg-white shadow-lg">
+                <img class="w-full h-auto bg-white" :src="dog.album_file"  alt="">
+                <button :class="storageLocation>=0 ? 'btnPrimary' : ''" @click="setFavorite">加入我的最愛</button>
+            </div>
             <div class="dogInfo">
                 <p  class="m-1">編號: <span> {{dog.animal_id}}</span></p>
                 <p  class="m-1">區域編號: <span> {{dog.animal_subid}}</span></p>
@@ -86,9 +88,7 @@ export default {
             localStorage.setItem("favorites", JSON.stringify(this.favorites));
         },
         getFavoriteLocation() {
-            this.storageLocation = this.favorites.indexOf(this.$route.params.dogid);
-            
-            
+            this.storageLocation = this.favorites.indexOf(parseInt(this.$route.params.dogid));
         }
     },
 }
@@ -96,12 +96,12 @@ export default {
 
 <style>
     .dogInfo {
-        @apply font-bold text-base text-base;
+        @apply font-bold text-2xl text-base;
     }
     .dogInfo p {
         @apply mb-3;
     }
     .dogInfo span {
-        @apply font-normal text-gray-800 text-base ml-2;
+        @apply font-normal text-gray-800 text-2xl ml-2;
     }
 </style>
