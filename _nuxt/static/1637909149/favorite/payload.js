@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/favorite", {data:[{test:"哈哈"}],fetch:{},mutations:void 0});
