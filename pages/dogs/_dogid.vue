@@ -8,31 +8,8 @@
                 <img class="w-full h-auto bg-white" :src="dog.album_file"  alt="">
                 <button :class="storageLocation>=0 ? 'btnPrimary' : ''" @click="setFavorite">加入我的最愛</button>
             </div>
-            <div class="dogInfo">
-                <p  class="m-1">編號: <span> {{dog.animal_id}}</span></p>
-                <p  class="m-1">區域編號: <span> {{dog.animal_subid}}</span></p>
-                <p  class="m-1">所屬縣市代碼: <span> {{dog.animal_area_pkid}}</span></p>
-                <p  class="m-1">所屬收容所代碼: <span> {{dog.animal_shelter_pkid}}</span></p>
-                <p  class="m-1">實際所在地: <span> {{dog.animal_place}}</span></p>
-                <p  class="m-1">性別: <span> {{dog.animal_sex}}</span></p>
-                <p  class="m-1">體型: <span> {{dog.animal_bodytype}}</span></p>
-                <p  class="m-1">毛色: <span> {{dog.animal_colour}}</span></p>
-                <p  class="m-1">年紀: <span> {{dog.animal_age}}</span></p>
-                <p  class="m-1">是否絕育: <span> {{dog.animal_sterilization}}</span></p>
-                <p  class="m-1">尋獲地: <span> {{dog.animal_foundplace}}</span></p>
-                <p  class="m-1">網頁標題: <span> {{dog.animal_title}}</span></p>
-                <p  class="m-1">狀態: <span> {{dog.animal_status}}</span></p>
-                <p  class="m-1">備註: <span> {{dog.animal_remark}}</span></p>
-                <p  class="m-1">其他說明: <span> {{dog.animal_caption}}</span></p>
-                <p  class="m-1">開放認養時間(起): <span> {{dog.animal_opendate}}</span></p>
-                <p  class="m-1">開放認養時間(迄): <span> {{dog.animal_closeddate}}</span></p>
-                <p  class="m-1">資料異動時間: <span> {{dog.animal_update}}</span></p>
-                <p  class="m-1">資料建立時間: <span> {{dog.animal_createtime}}</span></p>
-                <p  class="m-1">所屬收容所名稱: <span> {{dog.shelter_name}}</span></p>
-                <p  class="m-1">資料更新時間: <span> {{dog.album_update}}</span></p>
-                <p  class="m-1">資料建立時間: <span> {{dog.cDate}}</span></p>
-                <p  class="m-1">地址: <span> {{dog.shelter_address}}</span></p>
-                <p  class="m-1">聯絡電話: <span> {{dog.shelter_tel}}</span></p>
+            <div>
+                <CardInfos :infos="[]" :dog="dog" :style-title="'text-gray-800 text-lg font-semibold bg-yellow-300 py-1 px-2 rounded-lg mt-4'" :style-body="'text-gray-800 py-1 px-2 mt-4'"/>
             </div>
       </div>
   </div>
@@ -73,7 +50,6 @@ export default {
         const favoriteStr = localStorage.getItem("favorites");
         this.favorites = favoriteStr ? JSON.parse(favoriteStr) : [];
         this.getFavoriteLocation();
-        
     },
     methods: {
         async getSingleDog() {

@@ -4,7 +4,7 @@
           flex
           flex-col
           p-3
-          md:p-7
+          md:p-5
           bg-white
           rounded-sm
         "
@@ -22,19 +22,21 @@
             bg-gray-200
             text-gray-400
             flex
+            flex-col
             justify-center
             items-center
             shadow-inner
-            rounded-md
+            rounded-sm
             mb-2
+            gap-2
           "
         >
-          <p>no photo</p>
+          <DogBg />
         </div>
-        <CardInfoItem v-for="(info, index) in infoToShow" :key="index" :info="dog['animal_'+info]" />
+        <CardInfos :infos="infoToShow" :dog="dog" :style-title="'cardInfoTitle'" :style-body="'cardInfo'"/>
         <nuxt-link
           :to="{ name: 'dogs-dogid', params: { dogid: dog.animal_id } }"
-          class = "btnPrimary mt-2.5"
+          class = "btnPrimary mt-4"
           >詳細資訊 >
         </nuxt-link>
       </div>
@@ -51,7 +53,7 @@ export default {
   },
   data() {
     return {
-      infoToShow: ['bodytype', 'sex', 'colour', 'age', 'foundplace']
+      infoToShow: ['animal_bodytype', 'animal_sex', 'animal_colour', 'animal_age', 'animal_foundplace']
     }
   }
 }
