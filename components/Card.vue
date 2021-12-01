@@ -36,7 +36,7 @@
         <CardInfos :infos="infoToShow" :dog="dog" :style-title="'cardInfoTitle'" :style-body="'cardInfo'"/>
         <nuxt-link
           :to="{ name: 'dogs-dogid', params: { dogid: dog.animal_id } }"
-          class = "btnPrimary mt-4"
+          class = "btnPrimary mt-4 self-start"
           >詳細資訊 >
         </nuxt-link>
       </div>

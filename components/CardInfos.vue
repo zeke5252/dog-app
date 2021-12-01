@@ -1,11 +1,14 @@
 <template>
-  <ul class="mt-2">
-    <li v-for="(info, index) in getInfos" :key="index" class="mt-1 overflow-hidden whitespace-nowrap overflow-ellipsis">
+  <ul>
+    <li v-for="(info, index) in getInfos" :key="index" class="mt-1.5 overflow-hidden whitespace-nowrap overflow-ellipsis">
       <span :class="`${styleTitle}`+ ' mr-1'">
         {{ info[0] }}
       </span>
-      <span :class="`${styleBody}`">
+      <span v-if="info[1] !== ''" :class="`${styleBody}`">
         {{ info[1] }}
+      </span>
+      <span v-else class="opacity-60 text-yellow-600 text-xs font-bold">
+       ( 無資料 )
       </span>
     </li>
   </ul>
@@ -37,7 +40,9 @@ export default {
   computed: {
     getInfos() {
       let result;
-      result = Object.entries(this.dog);
+      const clonedDog = Object.assign({}, this.dog);
+      this.deletePropertiesNotDisplay(clonedDog);
+      result = Object.entries(clonedDog);
       if(this.infos.length !== 0){
         result = result.reduce((accumulator, info, index) => {
             this.infos.forEach(el=> {
@@ -162,9 +167,6 @@ export default {
           case "animal_remark":
             info[0] = "備註";
             break;
-          case "animal_caption":
-            info[0] = "其他說明 要拿掉";
-            break;
           case "animal_opendate":
             info[0] = "開放認養時間(起)";
             break;
@@ -196,6 +198,13 @@ export default {
         return info
       })
       return convertedResult;
+    },
+  },
+  methods: {
+    deletePropertiesNotDisplay (clonedDog){
+      delete clonedDog.album_file;
+      delete clonedDog.animal_caption;
+      delete clonedDog.animal_kind;
     },
   },
 }

@@ -1,17 +1,17 @@
 
 <template>
     <div class="flex flex-col items-start">
-        <nuxt-link class="btnPrimary mb-5" to="../">Back</nuxt-link>
         <Loading v-if="$fetchState.pending" position="mt-20 center"/>
-        <div v-else class="relative w-full">
-            <div class="relative flex flex-col gap-3 items-start justify-self-center w-full md:w-2/3 px-4 pt-4 pb-4 md:p-15 mb-10 bg-white shadow-lg">
+        <div v-else class="relative w-full mb-10">
+            <div class="relative flex flex-col gap-3 items-start justify-self-center w-full md:w-2/3 px-4 pt-4 pb-4 md:p-15 mb-10 bg-white shadow-sm">
                 <img class="w-full h-auto bg-white" :src="dog.album_file"  alt="">
-                <button :class="storageLocation>=0 ? 'btnPrimary' : ''" @click="setFavorite">加入我的最愛</button>
+                <button v-if="storageLocation>=0" class="btnPrimary" @click="setFavorite">加入我的最愛</button>
+                <button v-else class="btnSecondary" @click="setFavorite">取消最愛</button>
             </div>
             <div>
-                <CardInfos :infos="[]" :dog="dog" :style-title="'text-gray-800 text-lg font-semibold bg-yellow-300 py-1 px-2 rounded-lg mt-4'" :style-body="'text-gray-800 py-1 px-2 mt-4'"/>
+                <CardInfos :infos="[]" :dog="dog" :style-title="'text-gray-800 text-base font-semibold py-1 px-2 rounded-lg'" :style-body="'text-gray-800 text-sm py-1 px-2'"/>
             </div>
-      </div>
+        </div>
   </div>
 </template>
 
@@ -69,15 +69,3 @@ export default {
     },
 }
 </script>
-
-<style>
-    .dogInfo {
-        @apply font-bold text-2xl text-base;
-    }
-    .dogInfo p {
-        @apply mb-3;
-    }
-    .dogInfo span {
-        @apply font-normal text-gray-800 text-2xl ml-2;
-    }
-</style>
