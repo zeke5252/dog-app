@@ -1,12 +1,13 @@
 
 <template>
-    <div class="flex flex-col items-start">
-        <Loading v-if="$fetchState.pending" position="mt-20 center"/>
-        <div v-else class="relative w-full mb-10">
-            <div class="relative flex flex-col gap-3 items-start justify-self-center w-full md:w-2/3 px-4 pt-4 pb-4 md:p-15 mb-10 bg-white shadow-sm">
+    <div class="flex flex-col items-center">
+        <Loading v-if="$fetchState.pending" position="mt-32 center"/>
+        <div v-else class="relative w-full md:w-2/3 p-3 pt-0 md:p-0 mb-10">
+            <h1 class="text-3xl py-8">狗狗編號：<span class="text-yellow-400"> {{dog.animal_id}} </span></h1>
+            <div class="flex flex-col gap-3 items-start justify-self-center w-full p-3 md:p-15 mb-5 bg-white shadow-sm">
                 <img class="w-full h-auto bg-white" :src="dog.album_file"  alt="">
-                <button v-if="storageLocation>=0" class="btnPrimary" @click="setFavorite">加入我的最愛</button>
-                <button v-else class="btnSecondary" @click="setFavorite">取消最愛</button>
+                <button v-if="storageLocation>=0" class="btnSecondary" @click="setFavorite">取消最愛</button>
+                <button v-else class="btnPrimary" @click="setFavorite">加入我的最愛</button>
             </div>
             <div>
                 <CardInfos :infos="[]" :dog="dog" :style-title="'text-gray-800 text-base font-semibold py-1 px-2 rounded-lg'" :style-body="'text-gray-800 text-sm py-1 px-2'"/>

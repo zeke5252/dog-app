@@ -4,9 +4,10 @@
           flex
           flex-col
           p-3
-          md:p-5
+          md:p-3
           bg-white
           rounded-sm
+         shadow
         "
       >
         <div

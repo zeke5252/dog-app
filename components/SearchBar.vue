@@ -14,13 +14,15 @@
         </div>
         <div class="flex gap-x-3 w-full sm:w-auto sm:mr-3">
             <label for="colour" class="w-1/3 my-1">
-                <input id="colour" v-model.trim.lazy="searchObj.colour" placeholder="毛色 ( 黑 / 黃...)" type="search" class="inputStyle w-full" @keyup.enter="doFetch" />
+                <input id="colour" v-model.trim.lazy="searchObj.colour" placeholder="毛色 ( 黑 / 黃...)" type="search" class="inputStyle w-full appearance-none" @keyup.enter="doFetch" />
             </label>
             <label for="age" class="w-1/3 my-1">
-                <input id="age" v-model.trim.lazy="searchObj.age" placeholder="年紀" type="search" class="inputStyle w-full" @keyup.enter="doFetch" />
+            <select id="age" v-model="searchObj.age" class="inputStyle w-full" >
+                <option v-for="(option, index) in options.age" :key="index" :value="option.value">{{option.text}}</option>
+            </select>
             </label>
             <label for="foundplace" class="w-1/3 my-1">
-                <input id="foundPlace" v-model.trim.lazy="searchObj.foundPlace" placeholder="發現地點" type="search" class="inputStyle w-full" @keyup.enter="doFetch" />
+                <input id="foundPlace" v-model.trim.lazy="searchObj.foundPlace" placeholder="發現地點" type="search" class="inputStyle w-full appearance-none" @keyup.enter="doFetch" />
             </label>
         </div>
         <div class="flex gap-x-3 w-full sm:w-auto">
@@ -39,13 +41,18 @@ export default {
                 sex: [
                     {text:"公", value:"M"},
                     {text:"母", value:"F"},
-                    {text:"任意", value:""},
+                    {text:"性別", value:""},
                 ],
                 bodytype: [
                     {text:"大", value:"BIG"},
                     {text:"中", value:"MEDIUM"},
                     {text:"小", value:"SMALL"},
-                    {text:"任意", value:""},
+                    {text:"體型", value:""},
+                ],
+                age: [
+                    {text:"成犬", value:"ADULT"},
+                    {text:"幼犬", value:"CHILD"},
+                    {text:"年紀", value:""},
                 ]
             },
             searchObj: {
@@ -65,6 +72,7 @@ export default {
             this.searchObj = Object.assign({}, this.searchObj, {
                 bodytype: '',
                 sex: '',
+                age: '',
             });
             this.$emit("clear-results", [])
         },

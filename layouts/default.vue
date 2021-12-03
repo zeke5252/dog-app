@@ -1,6 +1,6 @@
 <template>
-    <div class="min-h-screen bg-yellow-200  flex justify-center">
-      <div class=" w-11/12 md:w-5/6">
+    <div class="min-h-screen bg-gray-100 flex justify-center">
+      <div class=" w-full">
         <Head />
         <Nuxt />
       </div>

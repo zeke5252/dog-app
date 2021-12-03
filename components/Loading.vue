@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="`${ position } animate-bounce w-20 h-20 bg-yellow-200 border-solid border-2 border-yellow-500 rounded-full flex justify-center items-center`"><span class=" text-sm">Loading</span></div>
+    <div :class="`${ position } animate-pulse w-36 h-12 border-solid border-4 border-yellow-400 flex justify-center items-center`"><span class="text-lg font-medium text-yellow-500">LOADING...</span></div>
   </div>
 </template>
 
