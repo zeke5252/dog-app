@@ -10,7 +10,7 @@
                 <button v-else class="btnPrimary" @click="setFavorite">加入我的最愛</button>
             </div>
             <div>
-                <CardInfos :infos="[]" :dog="dog" :style-title="'text-gray-800 text-base font-semibold py-1 px-2 rounded-lg'" :style-body="'text-gray-800 text-sm py-1 px-2'"/>
+                <CardInfos :infos="[]" :dog="dog" :style-title="'cardInfoTitle' + ' py-1 px-2'" :style-body="'cardInfoBody' + ' text-sm py-3 px-2'" :style-mt="'mt-4'"/>
             </div>
         </div>
   </div>

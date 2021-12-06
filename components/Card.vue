@@ -34,7 +34,7 @@
         >
           <DogBg />
         </div>
-        <CardInfos :infos="infoToShow" :dog="dog" :style-title="'cardInfoTitle'" :style-body="'cardInfo'"/>
+        <CardInfos :infos="infoToShow" :dog="dog" :style-title="'cardInfoTitle' + ' py-1 px-2'" :style-body="'cardInfo' + ' p1'"/>
         <nuxt-link
           :to="{ name: 'dogs-dogid', params: { dogid: dog.animal_id } }"
           class = "btnPrimary mt-4 self-start"

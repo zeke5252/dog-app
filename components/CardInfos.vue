@@ -1,12 +1,15 @@
 <template>
   <ul>
-    <li v-for="(info, index) in getInfos" :key="index" class="mt-1.5 overflow-hidden whitespace-nowrap overflow-ellipsis">
+    <li v-for="(info, index) in getInfos" :key="index" :class="`${styleMt} overflow-hidden whitespace-nowrap overflow-ellipsis`">
       <span :class="`${styleTitle}`+ ' mr-1'">
         {{ info[0] }}
       </span>
-      <span v-if="info[1] !== ''" :class="`${styleBody}`">
+      <span v-if="info[1] !== '' && !isPhoneNum(info[1])" :class="`${styleBody}`">
         {{ info[1] }}
       </span>
+      <a v-else-if="isPhoneNum(info[1])" :href="'tel:'+ info[1]" :class="`${styleBody} text-yellow-500 font-bold bg-white rounded-sm`">
+        {{ info[1] }}
+      </a>
       <span v-else class="opacity-60 text-yellow-600 text-xs font-bold">
        ( 無資料 )
       </span>
@@ -26,15 +29,19 @@ export default {
       type: Array,
       required: true,
     },
+    styleBody: {
+      type: String,
+      default: "",
+      require: true,
+    },
     styleTitle: {
       type: String,
       default: "",
       require: true,
     },
-    styleBody: {
+    styleMt: {
       type: String,
-      default: "",
-      require: true,
+      default: "mt-1.5",
     },
   },
   computed: {
@@ -206,6 +213,10 @@ export default {
       delete clonedDog.animal_caption;
       delete clonedDog.animal_kind;
     },
+    isPhoneNum(val) {
+    const globalRegex = /^\d{2,3}-\d{6,8}$/gm;
+    return globalRegex.test(val);
+    }
   },
 }
 </script>
