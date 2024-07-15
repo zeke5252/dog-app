@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{301:function(n,e,r){"use strict";r.r(e);var t={name:"Error"},o=r(29),component=Object(o.a)(t,(function(){return(0,this._self._c)("h1",[this._v("Something wrong here!")])}),[],!1,null,null,null);e.default=component.exports}}]);
