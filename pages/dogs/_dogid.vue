@@ -10,14 +10,10 @@
       >
         <img class="w-full h-auto bg-white" :src="dog.album_file" alt="" />
         <button
-          v-if="storageLocation >= 0"
-          class="btnSecondary"
-          @click="setFavorite"
+          :class="isInStorage ? 'btnSecondary' : 'btnPrimary'"
+          @click="handleFavorite"
         >
-          取消最愛
-        </button>
-        <button v-else class="btnPrimary" @click="setFavorite">
-          加入我的最愛
+          {{ isInStorage ? '取消最愛' : '加入我的最愛' }}
         </button>
       </div>
       <div>
@@ -34,20 +30,19 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { BASE_URL } from '../../constants/url.js'
+import { getDogData } from '../../utils/dog.js'
 
 export default {
-  name: 'SingleDog',
+  name: 'TheDog',
   data() {
     return {
       dog: {},
       favorites: [],
-      storageLocation: null,
+      storageIndex: null,
     }
   },
   async fetch() {
-    await this.getSingleDog()
+    this.dog = await getDogData(this.$route.params.dogid)
   },
   head() {
     return {
@@ -68,32 +63,26 @@ export default {
     }
   },
   fetchDelay: 1000,
+  computed: {
+    isInStorage() {
+      return this.storageIndex >= 0
+    },
+  },
   mounted() {
     const favoriteStr = localStorage.getItem('favorites')
     this.favorites = favoriteStr ? JSON.parse(favoriteStr) : []
-    this.getFavoriteLocation()
+    this.setStorageIndex()
   },
   methods: {
-    async getSingleDog() {
-      const results = await axios.get(
-        `${BASE_URL}?UnitId=QcbUEzN6E6DL&$filter=
-          animal_id+like+${this.$route.params.dogid}
-        `
-      )
-
-      results.data.forEach((result) => {
-        this.dog = result
-      })
-    },
-    setFavorite() {
-      this.storageLocation >= 0
-        ? this.favorites.splice(this.storageLocation, 1)
+    handleFavorite() {
+      this.isInStorage
+        ? this.favorites.splice(this.storageIndex, 1)
         : this.favorites.push(this.dog.animal_id)
-      this.getFavoriteLocation()
+      this.setStorageIndex()
       localStorage.setItem('favorites', JSON.stringify(this.favorites))
     },
-    getFavoriteLocation() {
-      this.storageLocation = this.favorites.indexOf(
+    setStorageIndex() {
+      this.storageIndex = this.favorites.indexOf(
         parseInt(this.$route.params.dogid)
       )
     },
